@@ -695,6 +695,9 @@ fn kusama_staging_testnet_config_genesis(wasm_binary: &[u8]) -> kusama::GenesisC
 		},
 		pallet_gilt: Default::default(),
 		parachains_paras: Default::default(),
+		pallet_sudo: kusama::SudoConfig {
+			key: endowed_accounts[0].clone(),
+		},
 	}
 }
 
@@ -1307,6 +1310,9 @@ pub fn kusama_testnet_genesis(
 		},
 		pallet_gilt: Default::default(),
 		parachains_paras: Default::default(),
+		pallet_sudo: kusama::SudoConfig {
+			key: endowed_accounts[0].clone(),
+		},
 	}
 }
 

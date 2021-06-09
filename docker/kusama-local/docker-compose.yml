@@ -1,0 +1,13 @@
+version: '3'
+services:
+  app:
+    container_name: polkafoundry-kusama-local
+    build: .
+    volumes:
+      - .:/usr/src/polkafoundry
+    command: ./polkadot --chain kusama-local.json --alice --pruning archive --discover-local --unsafe-ws-external --rpc-cors all
+
+    ports:
+      - "30333:30333/tcp"
+      - "9933:9933/tcp"
+      - "9944:9944/tcp"

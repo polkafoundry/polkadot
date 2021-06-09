@@ -71,6 +71,7 @@ pallet-tips = { git = "https://github.com/paritytech/substrate", default-feature
 pallet-treasury = { git = "https://github.com/paritytech/substrate", default-features = false , branch = "polkadot-v0.9.4" }
 pallet-utility = { git = "https://github.com/paritytech/substrate", default-features = false , branch = "polkadot-v0.9.4" }
 pallet-vesting = { git = "https://github.com/paritytech/substrate", default-features = false , branch = "polkadot-v0.9.4" }
+pallet-sudo = { git = "https://github.com/paritytech/substrate", default-features = false , branch = "polkadot-v0.9.4" }
 pallet-xcm = { path = "../../xcm/pallet-xcm", default-features = false }
 
 frame-benchmarking = { git = "https://github.com/paritytech/substrate", default-features = false, optional = true , branch = "polkadot-v0.9.4" }
@@ -155,6 +156,7 @@ std = [
 	"pallet-vesting/std",
 	"pallet-babe/std",
 	"pallet-randomness-collective-flip/std",
+	"pallet-sudo/std",
 	"pallet-xcm/std",
 	"sp-runtime/std",
 	"sp-staking/std",
