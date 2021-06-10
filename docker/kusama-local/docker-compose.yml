@@ -5,7 +5,7 @@ services:
     build: .
     volumes:
       - .:/usr/src/polkafoundry
-    command: ./polkadot --chain kusama-local.json --alice --pruning archive --discover-local --unsafe-ws-external --rpc-cors all
+    command: polkadot --chain /usr/local/kusama-local.json --alice --pruning archive --unsafe-ws-external --rpc-cors all --rpc-methods Unsafe
 
     ports:
       - "30333:30333/tcp"
