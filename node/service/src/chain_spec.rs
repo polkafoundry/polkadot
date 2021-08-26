@@ -538,8 +538,7 @@ fn kusama_staging_testnet_config_genesis(wasm_binary: &[u8]) -> kusama::GenesisC
 
 	// subkey inspect "$SECRET"
 	let endowed_accounts = vec![
-		// 5CVFESwfkk7NmhQ6FwHCM9roBvr9BGa4vJHFYU8DnGQxrXvz
-		hex!["12b782529c22032ed4694e0f6e7d486be7daa6d12088f6bc74d593b3900b8438"].into(),
+		hex!["ea8e9d3cfedc8afec25785703681d424e6aba10b728927b89d87a3776b47ee32"].into(),
 	];
 
 	// for i in 1 2 3 4; do for j in stash controller; do subkey inspect "$SECRET//$i//$j"; done; done
@@ -738,6 +737,9 @@ fn kusama_staging_testnet_config_genesis(wasm_binary: &[u8]) -> kusama::GenesisC
 		},
 		gilt: Default::default(),
 		paras: Default::default(),
+		sudo: kusama::SudoConfig {
+			key: endowed_accounts[0].clone(),
+		},
 	}
 }
 
@@ -1271,7 +1273,7 @@ pub fn kusama_testnet_genesis(
 		AssignmentId,
 		AuthorityDiscoveryId,
 	)>,
-	_root_key: AccountId,
+	root_key: AccountId,
 	endowed_accounts: Option<Vec<AccountId>>,
 ) -> kusama::GenesisConfig {
 	let endowed_accounts: Vec<AccountId> = endowed_accounts.unwrap_or_else(testnet_accounts);
@@ -1358,6 +1360,7 @@ pub fn kusama_testnet_genesis(
 		},
 		gilt: Default::default(),
 		paras: Default::default(),
+		sudo: kusama::SudoConfig { key: root_key },
 	}
 }
 
@@ -1702,6 +1705,8 @@ fn kusama_local_testnet_genesis(wasm_binary: &[u8]) -> kusama::GenesisConfig {
 		vec![
 			get_authority_keys_from_seed_no_beefy("Alice"),
 			get_authority_keys_from_seed_no_beefy("Bob"),
+			get_authority_keys_from_seed_no_beefy("Charlie"),
+			get_authority_keys_from_seed_no_beefy("Dave"),
 		],
 		get_account_id_from_seed::<sr25519::Public>("Alice"),
 		None,

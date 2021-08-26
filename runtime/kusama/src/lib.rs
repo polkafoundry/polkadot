@@ -106,6 +106,7 @@ pub use pallet_election_provider_multi_phase::Call as EPMCall;
 /// Constant values used within the runtime.
 pub mod constants;
 use constants::{time::*, currency::*, fee::*};
+use runtime_common::paras_sudo_wrapper;
 
 // Weights used in the runtime.
 mod weights;
@@ -122,7 +123,7 @@ pub const VERSION: RuntimeVersion = RuntimeVersion {
 	spec_name: create_runtime_str!("kusama"),
 	impl_name: create_runtime_str!("parity-kusama"),
 	authoring_version: 2,
-	spec_version: 9080,
+	spec_version: 9081,
 	impl_version: 0,
 	#[cfg(not(feature = "disable-runtime-api"))]
 	apis: RUNTIME_API_VERSIONS,
@@ -970,6 +971,13 @@ parameter_types! {
 	pub const MaxPending: u16 = 32;
 }
 
+// SUDO
+impl paras_sudo_wrapper::Config for Runtime {}
+impl pallet_sudo::Config for Runtime {
+	type Event = Event;
+	type Call = Call;
+}
+
 /// The type used to represent the kinds of proxying allowed.
 #[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd, Encode, Decode, RuntimeDebug, MaxEncodedLen)]
 pub enum ProxyType {
@@ -1263,7 +1271,7 @@ parameter_types! {
 /// The XCM router. When we want to send an XCM message, we use this type. It amalgamates all of our
 /// individual routers.
 pub type XcmRouter = (
-	// Only one router so far - use DMP to communicate with child parachains.
+	// Only one router so far - use DMP to comdeposit(1, 0)municate with child parachains.
 	xcm_sender::ChildParachainRouter<Runtime>,
 );
 
@@ -1501,6 +1509,10 @@ construct_runtime! {
 
 		// Pallet for sending XCM.
 		XcmPallet: pallet_xcm::{Pallet, Call, Storage, Event<T>, Origin} = 99,
+
+		// Sudo
+		ParasSudoWrapper: paras_sudo_wrapper::{Pallet, Call} = 120,
+		Sudo: pallet_sudo::{Pallet, Call, Storage, Event<T>, Config<T>} = 121,
 	}
 }
 
