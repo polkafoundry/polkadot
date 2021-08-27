@@ -10,12 +10,12 @@ RUN useradd -m -u 1000 -U -s /bin/sh -d /polkadot polkadot && \
 
 USER polkadot
 
-COPY --chown=polkadot /target/release/polkadot /polkadot/polkadot
-COPY --chown=polkadot /kusama-local.json /polkadot/kusama-local.json
+COPY --chown=polkadot target/release/polkadot /polkadot/polkadot
+COPY --chown=polkadot kusama-local.json /polkadot/kusama-local.json
 
 RUN chmod uog+x /polkadot/polkadot
 
-EXPOSE 30333 9933 9944
+EXPOSE 30333 9933 9944 9615
 
 VOLUME ["/data"]
 
