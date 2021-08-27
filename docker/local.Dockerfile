@@ -8,7 +8,7 @@ RUN useradd -m -u 1000 -U -s /bin/sh -d /polkadot polkadot && \
 	ln -s /data /polkadot/.local/share/polkadot && \
 	rm -rf /usr/bin /usr/sbin
 
-USER polkafoundry
+USER polkadot
 
 COPY --chown=polkadot /target/release/polkadot /polkadot/polkadot
 COPY --chown=polkadot /kusama-local.json /polkadot/kusama-local.json
