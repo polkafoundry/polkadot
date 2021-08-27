@@ -10,7 +10,7 @@ RUN useradd -m -u 1000 -U -s /bin/sh -d /polkadot polkadot && \
 
 USER polkadot
 
-COPY --chown=polkadot target/release/polkadot /polkadot/polkadot
+COPY --chown=polkadot bin/polkadot /polkadot/polkadot
 COPY --chown=polkadot kusama-local.json /polkadot/kusama-local.json
 
 RUN chmod uog+x /polkadot/polkadot
